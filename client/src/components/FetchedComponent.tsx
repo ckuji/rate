@@ -15,23 +15,18 @@ export const FetchedComponent: React.FC<FetchedComponentProps> = ({fetched}) => 
         listArrays.push(example)
     }
 
-    const onMouseHandler = (e: any, name: string) => {
+    const onMouseToHandler = (e: React.MouseEvent<HTMLDivElement>, name: string) => {
         const showed = document.getElementById('hint')
         showed!.style.display = 'block'
-        showed!.style.left = e.pageX + 40 + 'px'
-        showed!.style.top = e.pageY + 'px';
+        showed!.style.left = e.pageX + 'px'
+        showed!.style.top = e.pageY + 40 + 'px';
         setHintName(name)
-
     }
 
-    // useEffect(() => {
-    //     const hovered: any = document.querySelector('.listUnit')
-    //     const showed = document.getElementById('hint')
-    //     hovered.addEventListener('mouseover', (e: React.MouseEvent) => {
-    //         showed!.style.display = 'block'
-    //     })
-    //
-    // }, [])
+    const onMouseFromHandler = () => {
+        const showed = document.getElementById('hint')
+        showed!.style.display = 'none'
+    }
 
     return (
         <>
@@ -44,7 +39,8 @@ export const FetchedComponent: React.FC<FetchedComponentProps> = ({fetched}) => 
                                 name={unit.CharCode}
                                 value={unit.Value}
                                 previous={unit.Previous}
-                                onMouse={(e) => onMouseHandler(e, unit.Name)}
+                                onMouseTo={(e) => onMouseToHandler(e, unit.Name)}
+                                onMouseFrom={() => onMouseFromHandler()}
                             />
                         </li>
                     )

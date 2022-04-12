@@ -4,10 +4,11 @@ type ListUnitProps = {
     name: string
     value: number
     previous: number
-    onMouse(e: any): void
+    onMouseTo(e: React.MouseEvent<HTMLDivElement>): void
+    onMouseFrom(): void
 }
 
-export const ListUnit: React.FC<ListUnitProps> = ({name, value, previous, onMouse}) => {
+export const ListUnit: React.FC<ListUnitProps> = ({name, value, previous, onMouseTo, onMouseFrom}) => {
     const percentChangeTemporary: number = value / previous * 100000
     const percentChange: number = Math.trunc(percentChangeTemporary) / 1000
     let percentChangeBool = null
@@ -21,7 +22,8 @@ export const ListUnit: React.FC<ListUnitProps> = ({name, value, previous, onMous
     return (
         <div
             className="listUnit"
-            onMouseEnter={onMouse}
+            onMouseEnter={onMouseTo}
+            onMouseLeave={onMouseFrom}
         >
             <div className="cell">
                 {name}
