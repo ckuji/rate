@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 type ListUnitProps = {
     name: string
@@ -6,10 +6,12 @@ type ListUnitProps = {
     previous: number
     onMouseTo(e: React.MouseEvent<HTMLDivElement>): void
     onMouseFrom(): void
+    onClickItem(): void
 }
 
-export const ListUnit: React.FC<ListUnitProps> = ({name, value, previous, onMouseTo, onMouseFrom}) => {
-    const percentChangeTemporary: number = value / previous * 100000
+export const ListUnit: React.FC<ListUnitProps> = (
+    {name, value, previous, onMouseTo, onMouseFrom, onClickItem}) => {
+    const percentChangeTemporary: number = (value / previous) * 100000
     const percentChange: number = Math.trunc(percentChangeTemporary) / 1000
     let percentChangeBool = null
 
@@ -24,30 +26,17 @@ export const ListUnit: React.FC<ListUnitProps> = ({name, value, previous, onMous
             className="listUnit"
             onMouseEnter={onMouseTo}
             onMouseLeave={onMouseFrom}
+            onClick={onClickItem}
         >
-            <div className="cell">
-                {name}
-            </div>
-            <div className="cell">
-                {value}
-            </div>
+            <div className="cell">{name}</div>
+            <div className="cell">{value}</div>
             <div className="cell">
                 {percentChange}
-                <div className="percentWrapper">
-                    %
-                </div>
+                <div className="percentWrapper">%</div>
             </div>
             <div>
-                {percentChangeBool &&
-                    <div className="arrow arrow_toTop">
-
-                    </div>
-                }
-                {!percentChangeBool &&
-                    <div className="arrow arrow_toBot">
-
-                    </div>
-                }
+                {percentChangeBool && <div className="arrow arrow_toTop"></div>}
+                {!percentChangeBool && <div className="arrow arrow_toBot"></div>}
             </div>
         </div>
     )

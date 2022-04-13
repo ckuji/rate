@@ -28,6 +28,10 @@ export const FetchedComponent: React.FC<FetchedComponentProps> = ({fetched}) => 
         showed!.style.display = 'none'
     }
 
+    const onClickItemHandler = (name: string) => {
+        alert('Hello clickItem')
+    }
+
     return (
         <>
             <ul className="mainWrapper">
@@ -41,6 +45,7 @@ export const FetchedComponent: React.FC<FetchedComponentProps> = ({fetched}) => 
                                 previous={unit.Previous}
                                 onMouseTo={(e) => onMouseToHandler(e, unit.Name)}
                                 onMouseFrom={() => onMouseFromHandler()}
+                                onClickItem={() => onClickItemHandler(unit.Name)}
                             />
                         </li>
                     )
@@ -48,6 +53,9 @@ export const FetchedComponent: React.FC<FetchedComponentProps> = ({fetched}) => 
             </ul>
             <div id="hint" className="hint">
                 {hintName}
+            </div>
+            <div>
+
             </div>
         </>
     )
